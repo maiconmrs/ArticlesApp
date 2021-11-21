@@ -1,13 +1,11 @@
 const initialState = {
-  Articles: [],
+  articles: [],
 };
 
-export default function articleReducer(state = initialState, action) {
+export default function articlesReducer(state = initialState, action) {
   switch (action.type) {
     case "ARTICLES_FETCHED": {
-      return {
-        Articles: action.payload,
-      };
+      return { ...state, articles: action.payload };
     }
 
     default: {

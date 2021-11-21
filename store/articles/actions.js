@@ -6,19 +6,18 @@ export const articlesFetched = (articles) => ({
   payload: articles,
 });
 
-// export function fetchArticles(keyword) {  <--- keyword provided by searchbar
-
-export function fetchArticles() {
+export function fetchArticles(keyword) {
   return async function thunk(dispatch, getState) {
     try {
-      const response = await axios.get(apiUrl);
+      const response = await axios.get(`${apiUrl}${keyword}`);
 
-      const articles = response.data;
+      const articles = response.data.articles;
+
+      console.log(articles);
 
       dispatch(articlesFetched(articles));
     } catch (e) {
       console.log(e);
     }
-    console.log(articles);
   };
 }
