@@ -2,8 +2,8 @@ import * as React from "react";
 import { Provider } from "react-redux";
 import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import SearchPage from "./pages/SearchPage";
-import ReadingList from "./pages/ReadingList";
+import SearchScreen from "./screens/SearchScreen";
+import ReadingList from "./screens/ReadingList";
 
 import store from "./store/store";
 
@@ -13,7 +13,7 @@ function MyDrawer() {
   return (
     <Provider store={store}>
       <Drawer.Navigator>
-        <Drawer.Screen name="Search" component={SearchPage} />
+        <Drawer.Screen name="Search" component={SearchScreen} />
         <Drawer.Screen name="Reading List" component={ReadingList} />
       </Drawer.Navigator>
     </Provider>

@@ -6,10 +6,10 @@ export const articlesFetched = (articles) => ({
   payload: articles,
 });
 
-export function fetchArticles(keyword) {
+export function fetchArticles(keyWord) {
   return async function thunk(dispatch, getState) {
     try {
-      const response = await axios.get(`${apiUrl}${keyword}`);
+      const response = await axios.get(`${apiUrl}${keyWord}`);
 
       const articles = response.data.articles;
 
