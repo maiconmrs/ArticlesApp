@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { View } from "react-native";
-import { Text } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+
+import { View, Linking } from "react-native";
 
 import {
   Container,
@@ -11,6 +13,12 @@ import {
   HeaderTitle,
   SearchArea,
   SearchInput,
+  ArticleArea,
+  ArticleImage,
+  ArticleInfoArea,
+  ArticleTitle,
+  ArticleDescription,
+  ArticleDate,
 } from "./styles";
 
 import { fetchArticles } from "../../store/articles/actions";
@@ -23,26 +31,30 @@ function SearchPage() {
 
   useEffect(() => {
     dispatch(fetchArticles(keyWord));
-  }, [keyWord]);
+  }, []);
 
   console.log("The articles:", articles);
   console.log("KW:", keyWord);
+
   return (
     <Container>
       <Scroller>
         <HeaderArea>
           <HeaderTitle numberOfLines={4}>
-            Hi,<br></br>
-            about what do you want to get information?
+            Hi, what do you want to be informed about?
           </HeaderTitle>
         </HeaderArea>
 
         <SearchArea>
           <SearchInput
-            placeholder="Keyword"
+            placeholder="Subject"
             value={keyWord}
             onChangeText={(word) => setKeyWord(word)}
           />
+
+          <TouchableOpacity onPress={() => dispatch(fetchArticles(keyWord))}>
+            <FontAwesome5 name="search" />
+          </TouchableOpacity>
         </SearchArea>
 
         {keyWord ? (
@@ -50,7 +62,20 @@ function SearchPage() {
             style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
           >
             {articles.map((article) => {
-              return <Text>1 {article.title}</Text>;
+              return (
+                <ArticleArea onPress={() => Linking.openURL(`${article.url}`)}>
+                  <ArticleImage source={{ uri: article.urlToImage }} />
+                  <ArticleInfoArea>
+                    <ArticleTitle>{article.title}</ArticleTitle>
+                    <ArticleDescription>
+                      {article.description}
+                    </ArticleDescription>
+                    <ArticleDate>
+                      Published: {article.publishedAt.substr(0, 10)}
+                    </ArticleDate>
+                  </ArticleInfoArea>
+                </ArticleArea>
+              );
             })}
           </View>
         ) : null}
