@@ -1,5 +1,15 @@
 # ArticlesApp
 
+## Install
+
+In the root directory
+
+- Install dependencies: `npm install`
+
+## Planned Wireframe
+
+![Wireframe](./Wireframe.png)
+
 ## React Native Task
 
 News searching and saving application.
