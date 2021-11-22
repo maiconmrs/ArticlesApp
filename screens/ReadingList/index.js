@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { View, Linking, Button, Alert } from "react-native";
 
-import { deleteAllArticles } from "../../store/articles/actions";
+import { deleteAllArticles, deleteArticle } from "../../store/articles/actions";
 
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
@@ -19,10 +19,8 @@ import {
   ArticleDescription,
   ArticleDate,
   RemoveArticle,
-  CleanButton,
   NumberOfArticles,
 } from "./styles";
-import { Article } from "@styled-icons/material-outlined";
 
 function ReadingList() {
   const { articles, savedArticles } = useSelector(
@@ -35,6 +33,13 @@ function ReadingList() {
       { text: "OK", onPress: () => console.log("Pressed") },
     ]);
     dispatch(deleteAllArticles());
+  };
+
+  const removeArticle = (index) => {
+    Alert.alert("The article was removed", "", [
+      { text: "OK", onPress: () => console.log("Pressed") },
+    ]);
+    dispatch(deleteArticle(index));
   };
 
   console.log("All:", articles);
@@ -50,7 +55,7 @@ function ReadingList() {
             </HeaderTitle>
             <NumberOfArticles>
               You have {`${savedArticles.length}`}{" "}
-              {savedArticles.length > 1 ? "articles" : "article"} saved
+              {savedArticles.length > 1 ? "articles" : "article"} in your list
             </NumberOfArticles>
             <View
               style={{
@@ -59,12 +64,30 @@ function ReadingList() {
                 alignItems: "center",
               }}
             >
-              {savedArticles.map((article) => {
+              {savedArticles.map((article, index) => {
                 return (
                   <ArticleArea
                     onPress={() => Linking.openURL(`${article.url}`)}
                   >
-                    <RemoveArticle>
+                    <RemoveArticle
+                      onPress={() =>
+                        Alert.alert(
+                          "Do you want remove this article from your list?",
+                          `"${article.title}" will be removed from your reading list.`,
+                          [
+                            {
+                              text: "Yes",
+
+                              onPress: () => removeArticle(index),
+                            },
+                            {
+                              text: "No",
+                              onPress: () => console.log("Pressed"),
+                            },
+                          ]
+                        )
+                      }
+                    >
                       <FontAwesome5 name="minus-circle" color="#cc0000" />
                     </RemoveArticle>
                     <ArticleImage source={{ uri: article.urlToImage }} />
@@ -84,13 +107,15 @@ function ReadingList() {
                 color="#cc0000"
                 border-radius="5px"
                 title="Clean "
-                accessibilityLabel="Learn more about this purple button"
                 onPress={() =>
                   Alert.alert(
                     "Do you want clean your list?",
                     "This action will remove all articles from your reading list.",
                     [
-                      { text: "Yes", onPress: () => clearMyList() },
+                      {
+                        text: "Yes",
+                        onPress: () => clearMyList(),
+                      },
                       { text: "No", onPress: () => console.log("Pressed") },
                     ]
                   )
@@ -101,7 +126,7 @@ function ReadingList() {
         ) : (
           <HeaderArea>
             <HeaderTitle numberOfLines={4}>
-              You don't have articles saved
+              You don't have articles in your list.
             </HeaderTitle>
           </HeaderArea>
         )}

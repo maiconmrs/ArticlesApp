@@ -19,6 +19,12 @@ export const deleteAllArticles = (article) => (dispatch) => {
     payload: article,
   });
 };
+export const deleteArticle = (index) => (dispatch) => {
+  dispatch({
+    type: "DELETE_ARTICLE",
+    payload: index,
+  });
+};
 
 export function fetchArticles(keyWord) {
   return async function thunk(dispatch, getState) {

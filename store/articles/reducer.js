@@ -20,6 +20,14 @@ export default function articlesReducer(state = initialState, action) {
         savedArticles: [],
       };
 
+    case "DELETE_ARTICLE":
+      return {
+        ...state,
+        savedArticles: state.savedArticles.filter(
+          (item, index) => index !== action.payload
+        ),
+      };
+
     default: {
       return state;
     }
