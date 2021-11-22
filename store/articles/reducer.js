@@ -1,5 +1,6 @@
 const initialState = {
   articles: [],
+  savedArticles: [],
 };
 
 export default function articlesReducer(state = initialState, action) {
@@ -7,6 +8,11 @@ export default function articlesReducer(state = initialState, action) {
     case "ARTICLES_FETCHED": {
       return { ...state, articles: action.payload };
     }
+    case "SAVE_ARTICLE":
+      return {
+        ...state,
+        savedArticles: [...state.savedArticles, action.payload],
+      };
 
     default: {
       return state;

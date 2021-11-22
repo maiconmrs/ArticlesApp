@@ -6,6 +6,13 @@ export const articlesFetched = (articles) => ({
   payload: articles,
 });
 
+export const saveArticle = (article) => (dispatch) => {
+  dispatch({
+    type: "SAVE_ARTICLE",
+    payload: article,
+  });
+};
+
 export function fetchArticles(keyWord) {
   return async function thunk(dispatch, getState) {
     try {

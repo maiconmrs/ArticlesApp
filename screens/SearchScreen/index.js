@@ -23,7 +23,7 @@ import {
   SaveArticle,
 } from "./styles";
 
-import { fetchArticles } from "../../store/articles/actions";
+import { fetchArticles, saveArticle } from "../../store/articles/actions";
 
 function SearchPage() {
   const dispatch = useDispatch();
@@ -31,18 +31,19 @@ function SearchPage() {
 
   const [keyWord, setKeyWord] = useState("");
 
-  const addToReadingList = () => {
+  const addToReadingList = (article) => {
     Alert.alert("This article is now in your list!", "", [
-      { text: "OK", onPress: () => console.log("OK Pressed") },
+      { text: "OK", onPress: () => console.log("Pressed") },
     ]);
+    dispatch(saveArticle(article));
   };
 
   useEffect(() => {
     dispatch(fetchArticles(keyWord));
   }, []);
 
-  console.log("The articles:", articles);
-  console.log("KW:", keyWord);
+  // console.log("The articles:", articles);
+  // console.log("KW:", keyWord);
 
   return (
     <Container>
@@ -65,20 +66,20 @@ function SearchPage() {
           </TouchableOpacity>
         </SearchArea>
 
-        {articles.length > 0 ? (
+        {articles && articles.length > 0 ? (
           <NumberOfArticles>
             {`${articles.length}`} results found
           </NumberOfArticles>
         ) : null}
 
-        {keyWord ? (
+        {articles || keyWord ? (
           <View
             style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
           >
             {articles.map((article) => {
               return (
                 <ArticleArea onPress={() => Linking.openURL(`${article.url}`)}>
-                  <SaveArticle onPress={() => addToReadingList()}>
+                  <SaveArticle onPress={() => addToReadingList(article)}>
                     <FontAwesome5 name="bookmark" color="#cc0000" />
                   </SaveArticle>
                   <ArticleImage source={{ uri: article.urlToImage }} />
