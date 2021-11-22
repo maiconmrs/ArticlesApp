@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { View, Linking, Alert } from "react-native";
 
 import { TouchableOpacity } from "react-native-gesture-handler";
+
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
-import { View, Linking, Alert } from "react-native";
+import { fetchArticles, saveArticle } from "../../store/articles/actions";
 
 import {
   Container,
@@ -23,8 +25,6 @@ import {
   SaveArticle,
 } from "./styles";
 
-import { fetchArticles, saveArticle } from "../../store/articles/actions";
-
 function SearchPage() {
   const dispatch = useDispatch();
   const { articles } = useSelector((state) => state.articlesReducer);
@@ -40,9 +40,6 @@ function SearchPage() {
   useEffect(() => {
     dispatch(fetchArticles(keyWord));
   }, []);
-
-  // console.log("The articles:", articles);
-  // console.log("KW:", keyWord);
 
   return (
     <Container>

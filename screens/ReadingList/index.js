@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { View, Button, Alert } from "react-native";
 
-import { View, Linking, Button, Alert } from "react-native";
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
 import { deleteAllArticles, deleteArticle } from "../../store/articles/actions";
 
-import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import ArticleModal from "../../components/ArticleModal";
 
 import {
@@ -30,18 +30,18 @@ function ReadingList() {
   const [selectedArticle, setSelectedArticle] = useState();
   const [showModal, setShowModal] = useState(false);
 
-  const clearMyList = () => {
-    Alert.alert("Your list is clean now!", "", [
-      { text: "OK", onPress: () => console.log("Pressed") },
-    ]);
-    dispatch(deleteAllArticles());
-  };
-
   const removeArticle = (index) => {
     Alert.alert("The article was removed", "", [
       { text: "OK", onPress: () => console.log("Pressed") },
     ]);
     dispatch(deleteArticle(index));
+  };
+
+  const clearMyList = () => {
+    Alert.alert("Your list is clean now!", "", [
+      { text: "OK", onPress: () => console.log("Pressed") },
+    ]);
+    dispatch(deleteAllArticles());
   };
 
   const openArticle = (article) => {

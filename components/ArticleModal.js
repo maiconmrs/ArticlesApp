@@ -1,7 +1,7 @@
 import React from "react";
-import { useNavigation } from "@react-navigation/core";
+import { Linking } from "react-native";
 
-import { Text, Linking } from "react-native";
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
 import {
   Modal,
@@ -17,8 +17,6 @@ import {
   ArticleArea,
   Message,
 } from "./styles";
-
-import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
 export default ({ show, setShow, article }) => {
   const closeModal = () => {
