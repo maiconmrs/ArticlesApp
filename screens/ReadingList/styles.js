@@ -49,7 +49,6 @@ export const NumberOfArticles = styled.Text`
   font-weight: bold;
   color: #cc0000;
   text-align: left;
-  margin-left: 20px;
 `;
 
 export const ArticleArea = styled.TouchableOpacity`
@@ -100,6 +99,10 @@ export const RemoveArticle = styled.TouchableOpacity`
   z-index: 1;
   position: absolute;
   padding: 4px;
-  margin-left: 15px;
+  margin-left: 10px;
   margin-top: 2px;
+`;
+
+export const CleanButton = styled.Button`
+  color: #cc0000;
 `;

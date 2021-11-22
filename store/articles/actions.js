@@ -13,6 +13,13 @@ export const saveArticle = (article) => (dispatch) => {
   });
 };
 
+export const deleteAllArticles = (article) => (dispatch) => {
+  dispatch({
+    type: "DELETE_ALL_ARTICLES",
+    payload: article,
+  });
+};
+
 export function fetchArticles(keyWord) {
   return async function thunk(dispatch, getState) {
     try {

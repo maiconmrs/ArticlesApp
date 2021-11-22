@@ -14,6 +14,12 @@ export default function articlesReducer(state = initialState, action) {
         savedArticles: [...state.savedArticles, action.payload],
       };
 
+    case "DELETE_ALL_ARTICLES":
+      return {
+        ...state,
+        savedArticles: [],
+      };
+
     default: {
       return state;
     }

@@ -28,7 +28,6 @@ import { fetchArticles, saveArticle } from "../../store/articles/actions";
 function SearchPage() {
   const dispatch = useDispatch();
   const { articles } = useSelector((state) => state.articlesReducer);
-
   const [keyWord, setKeyWord] = useState("");
 
   const addToReadingList = (article) => {
@@ -80,7 +79,11 @@ function SearchPage() {
               return (
                 <ArticleArea onPress={() => Linking.openURL(`${article.url}`)}>
                   <SaveArticle onPress={() => addToReadingList(article)}>
-                    <FontAwesome5 name="bookmark" color="#cc0000" />
+                    <FontAwesome5
+                      class="solid"
+                      name="bookmark"
+                      color="#cc0000"
+                    />
                   </SaveArticle>
                   <ArticleImage source={{ uri: article.urlToImage }} />
                   <ArticleInfoArea>
