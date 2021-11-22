@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { View, Linking, Button, Alert } from "react-native";
@@ -6,6 +6,7 @@ import { View, Linking, Button, Alert } from "react-native";
 import { deleteAllArticles, deleteArticle } from "../../store/articles/actions";
 
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import ArticleModal from "../../components/ArticleModal";
 
 import {
   Container,
@@ -23,10 +24,11 @@ import {
 } from "./styles";
 
 function ReadingList() {
-  const { articles, savedArticles } = useSelector(
-    (state) => state.articlesReducer
-  );
+  const { savedArticles } = useSelector((state) => state.articlesReducer);
   const dispatch = useDispatch();
+
+  const [selectedArticle, setSelectedArticle] = useState();
+  const [showModal, setShowModal] = useState(false);
 
   const clearMyList = () => {
     Alert.alert("Your list is clean now!", "", [
@@ -42,8 +44,10 @@ function ReadingList() {
     dispatch(deleteArticle(index));
   };
 
-  console.log("All:", articles);
-  console.log("Saved:", savedArticles);
+  const openArticle = (article) => {
+    setSelectedArticle(article);
+    setShowModal(true);
+  };
 
   return (
     <Container>
@@ -66,9 +70,7 @@ function ReadingList() {
             >
               {savedArticles.map((article, index) => {
                 return (
-                  <ArticleArea
-                    onPress={() => Linking.openURL(`${article.url}`)}
-                  >
+                  <ArticleArea onPress={() => openArticle(article)}>
                     <RemoveArticle
                       onPress={() =>
                         Alert.alert(
@@ -100,6 +102,11 @@ function ReadingList() {
                         Published: {article.publishedAt.substr(0, 10)}
                       </ArticleDate>
                     </ArticleInfoArea>
+                    <ArticleModal
+                      show={showModal}
+                      setShow={setShowModal}
+                      article={selectedArticle}
+                    />
                   </ArticleArea>
                 );
               })}

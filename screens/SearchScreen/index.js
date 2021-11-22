@@ -79,11 +79,7 @@ function SearchPage() {
               return (
                 <ArticleArea onPress={() => Linking.openURL(`${article.url}`)}>
                   <SaveArticle onPress={() => addToReadingList(article)}>
-                    <FontAwesome5
-                      class="solid"
-                      name="bookmark"
-                      color="#cc0000"
-                    />
+                    <FontAwesome5 name="bookmark" color="#cc0000" />
                   </SaveArticle>
                   <ArticleImage source={{ uri: article.urlToImage }} />
                   <ArticleInfoArea>

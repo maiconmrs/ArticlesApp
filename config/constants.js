@@ -1,3 +1,3 @@
-const apiKey = "fd8f5bd75a3b475a8bc4ced2f50ee0ae";
+const apiKey = "40a1f842cdab4ff5b261b91c126df6ba";
 
 export const apiUrl = `https://newsapi.org/v2/everything?apiKey=${apiKey}&q=`;
