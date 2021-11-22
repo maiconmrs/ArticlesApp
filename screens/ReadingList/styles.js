@@ -53,7 +53,7 @@ export const NumberOfArticles = styled.Text`
 `;
 
 export const ArticleArea = styled.TouchableOpacity`
-  background-color: #ffffff;
+  background-color: #ff0099;
   height: 100px;
   margin-top: 10px;
   padding: 5px;
@@ -95,10 +95,4 @@ export const ArticleDate = styled.Text`
   font-weight: bold;
   color: #000000;
   text-align: right;
-`;
-export const SaveArticle = styled.TouchableOpacity`
-  z-index: 1;
-  position: absolute;
-  padding: 4px;
-  margin-left: 15px;
 `;

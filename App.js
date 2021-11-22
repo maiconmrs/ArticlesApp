@@ -11,19 +11,19 @@ const Drawer = createDrawerNavigator();
 
 function MyDrawer() {
   return (
-    <Provider store={store}>
-      <Drawer.Navigator>
-        <Drawer.Screen name="Search" component={SearchScreen} />
-        <Drawer.Screen name="Reading List" component={ReadingList} />
-      </Drawer.Navigator>
-    </Provider>
+    <Drawer.Navigator>
+      <Drawer.Screen name="Search" component={SearchScreen} />
+      <Drawer.Screen name="My Reading List" component={ReadingList} />
+    </Drawer.Navigator>
   );
 }
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <MyDrawer />
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <MyDrawer />
+      </NavigationContainer>
+    </Provider>
   );
 }
